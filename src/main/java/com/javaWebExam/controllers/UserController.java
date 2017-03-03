@@ -30,12 +30,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String postRegister(@ModelAttribute RegisterModel registerModel, HttpSession session){
-        User user = new User();
-
-        user.setUsername(registerModel.getUsername());
-        user.setPassword(registerModel.getPassword());
-
-        userService.registerUser(user);
+        User user = userService.registerUser(registerModel);
 
         session.setAttribute("logged_user", user);
 
@@ -50,7 +45,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String postLogin(@ModelAttribute LoginModel loginModel, HttpSession session){
         User user = userService.findLoggedInUser(loginModel);
 
