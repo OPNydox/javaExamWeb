@@ -1,6 +1,7 @@
 package com.javaWebExam.servicesImpl;
 
 import com.javaWebExam.entities.User;
+import com.javaWebExam.models.bindingModels.LoginModel;
 import com.javaWebExam.repositories.UserRepository;
 import com.javaWebExam.services.UserService;
 
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserByName(String username) {
-        return userRepository.getUserByName(username);
+    public User findLoggedInUser(LoginModel loginModel) {
+        return userRepository.getLoggedUser(loginModel.getUsername(), loginModel.getPassword());
     }
 }
